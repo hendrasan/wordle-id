@@ -61,10 +61,12 @@ const Daily: NextPage = () => {
         Today&apos;s word is: {puzzle} (#{puzzleIndex})
       </p>
 
-      <Grid guesses={guesses} currentGuess={currentGuess} />
+      <Grid guesses={guesses} currentGuess={currentGuess} puzzle={puzzle} />
 
       <Keyboard
         guesses={guesses}
+        puzzle={puzzle}
+        isGameWon={isGameWon}
         onEnter={onEnter}
         onDelete={onDelete}
         onChar={onChar}

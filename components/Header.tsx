@@ -1,4 +1,5 @@
 import clsxm from '@/lib/clsxm';
+import Link from 'next/link';
 
 export default function Header() {
   return (
@@ -8,7 +9,9 @@ export default function Header() {
       )}
     >
       <h1 className={clsxm('text-xl mr-auto font-bold uppercase')}>
-        Wordle ID
+        <Link href='/'>
+          <a>Wordle ID</a>
+        </Link>
       </h1>
       <button>
         <svg
