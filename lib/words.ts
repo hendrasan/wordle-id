@@ -1,7 +1,7 @@
 import {
   FIVELETTERPUZZLES,
   FIVELETTERVALIDGUESSES,
-} from "../constants/wordlist";
+} from '../constants/wordlist';
 
 export const isWordValid = (word: string) => {
   return (
