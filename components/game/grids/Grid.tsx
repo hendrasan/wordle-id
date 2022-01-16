@@ -1,5 +1,6 @@
 import clsxm from '@/lib/clsxm';
-import { Cell } from './Cell';
+import { CurrentRow } from './CurrentRow';
+import { EmptyRow } from './EmptyRow';
 
 type GridProps = {
   guesses: string[];
@@ -7,11 +8,14 @@ type GridProps = {
 };
 
 export default function Grid({ guesses, currentGuess }: GridProps) {
-  const empties = Array.from(Array(6));
+  const empties =
+    guesses.length < 5 ? Array.from(Array(5 - guesses.length)) : [];
+
   return (
-    <div className={clsxm('flex gap-x-2')}>
+    <div className={clsxm('my-4 flex flex-col items-center gap-2')}>
+      {guesses.length < 6 && <CurrentRow guess={currentGuess} />}
       {empties.map((_, i) => (
-        <Cell key={i} value='W' state='correct' />
+        <EmptyRow key={i} />
       ))}
     </div>
   );

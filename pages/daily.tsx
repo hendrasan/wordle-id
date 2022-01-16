@@ -11,11 +11,7 @@ const Daily: NextPage = () => {
   const [currentGuess, setCurrentGuess] = useState('');
 
   return (
-    <div
-      className={clsxm(
-        'px-8 max-w-md min-h-screen justify-between mx-auto flex flex-col'
-      )}
-    >
+    <div className={clsxm('px-8 max-w-md min-h-screen mx-auto flex flex-col')}>
       <Header />
 
       <p>
@@ -23,8 +19,7 @@ const Daily: NextPage = () => {
       </p>
 
       <Grid guesses={guesses} currentGuess={currentGuess} />
-
-      <Footer />
+      {/* keyboard */}
     </div>
   );
 };
