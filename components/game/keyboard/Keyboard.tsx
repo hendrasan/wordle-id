@@ -1,5 +1,6 @@
 import { CharValue, evaluateKeyboardStates, KeyValue } from '@/lib/keyboard';
-import { useEffect } from 'react';
+import { CharState } from '@/lib/states';
+import { useEffect, useState } from 'react';
 import { Key } from './Key';
 
 type Props = {
@@ -19,7 +20,14 @@ export function Keyboard({
   onDelete,
   onChar,
 }: Props) {
-  const keyboardStates = evaluateKeyboardStates(guesses, puzzle);
+  const [keyboardStates, setKeyboardStates] = useState<{
+    [key: string]: CharState;
+  }>({});
+
+  useEffect(() => {
+    const kb = evaluateKeyboardStates(guesses, puzzle);
+    setKeyboardStates(kb);
+  }, [guesses, puzzle]);
 
   const onClick = (value: KeyValue) => {
     if (isGameWon) return;
@@ -37,6 +45,7 @@ export function Keyboard({
     const listener = (e: KeyboardEvent) => {
       if (isGameWon) return;
       if (e.code == 'Enter') {
+        e.preventDefault();
         onEnter();
       } else if (e.code == 'Backspace') {
         onDelete();

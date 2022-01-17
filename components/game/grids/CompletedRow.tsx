@@ -1,4 +1,6 @@
+import { CharState } from '@/lib/states';
 import { evaluateGuess } from '@/lib/words';
+import { useEffect, useState } from 'react';
 import { Cell } from './Cell';
 
 type Props = {
@@ -7,9 +9,13 @@ type Props = {
 };
 
 export function CompletedRow({ guess, puzzle }: Props) {
+  const [evaluations, setEvaluations] = useState<CharState[]>([]);
   const splitGuess = guess ? guess.split('') : [];
 
-  const evaluations = evaluateGuess(guess, puzzle);
+  useEffect(() => {
+    const ev = evaluateGuess(guess, puzzle);
+    setEvaluations(ev);
+  }, [guess, puzzle]);
 
   return (
     <div className='flex gap-2'>

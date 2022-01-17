@@ -57,10 +57,6 @@ const Daily: NextPage = () => {
     >
       <Header />
 
-      <p>
-        Today&apos;s word is: {puzzle} (#{puzzleIndex})
-      </p>
-
       <Grid guesses={guesses} currentGuess={currentGuess} puzzle={puzzle} />
 
       <Keyboard
