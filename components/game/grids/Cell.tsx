@@ -1,6 +1,5 @@
 import clsxm from '@/lib/clsxm';
 
-clsxm;
 type CellProps = {
   value?: string;
   state?: 'absent' | 'present' | 'correct';
@@ -8,7 +7,7 @@ type CellProps = {
 
 export function Cell({ value, state }: CellProps) {
   const classNames = clsxm(
-    'w-14 h-14 border-2 border-gray-300 text-gray-900 font-bold text-3xl',
+    'w-12 h-12 md:w-14 md:h-14 border-2 border-gray-300 text-gray-900 font-bold text-3xl',
     'flex items-center justify-center',
     [
       value && ['border-gray-900'],

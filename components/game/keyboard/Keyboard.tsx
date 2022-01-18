@@ -90,7 +90,7 @@ export function Keyboard({
         <Key
           value='ENTER'
           onClick={onClick}
-          classnames='text-xs min-w-[70px]'
+          classnames='text-xs md:min-w-[70px]'
         />
         {['Z', 'X', 'C', 'V', 'B', 'N', 'M'].map((char, i) => (
           <Key
@@ -100,7 +100,7 @@ export function Keyboard({
             state={keyboardStates[char]}
           />
         ))}
-        <Key value='DELETE' onClick={onClick} classnames='min-w-[50px]'>
+        <Key value='DELETE' onClick={onClick} classnames='md:min-w-[50px]'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             className='h-6 w-6'
