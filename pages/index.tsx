@@ -21,8 +21,8 @@ const Home: NextPage = () => {
       </div>
       <div className='flex flex-col my-8 space-y-4'>
         <ButtonLink href='/daily'>DAILY</ButtonLink>
-        <ButtonLink href='/daily'>STORY</ButtonLink>
-        <ButtonLink href='/daily'>PRACTICE</ButtonLink>
+        {/* <ButtonLink href='/daily'>STORY</ButtonLink> */}
+        <ButtonLink href='/endless'>ENDLESS</ButtonLink>
       </div>
 
       <Footer />
