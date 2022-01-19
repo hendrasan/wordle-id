@@ -13,13 +13,20 @@ export default function Game({ puzzle }: Props) {
   const [guesses, setGuesses] = useState<string[]>([]);
   const [currentGuess, setCurrentGuess] = useState('');
   const [isGameWon, setIsGameWon] = useState(false);
+  const [isGameLost, setIsGameLost] = useState(false);
+  const [isGameComplete, setIsGameComplete] = useState(false);
 
   useEffect(() => {
-    if (isGameWon) {
-      toast.success('You win', { icon: '👏' });
-      // open win modal
+    if (isGameComplete) {
+      if (isGameWon) {
+        toast.success('You win', { icon: '👏' });
+        // open win modal
+        // if endless mode, show play again button
+      } else if (isGameLost) {
+        toast.success('You lost', { icon: '😭' });
+      }
     }
-  }, [isGameWon]);
+  }, [isGameComplete, isGameLost, isGameWon]);
 
   const onChar = (value: string) => {
     if (currentGuess.length < 5 && guesses.length < 6) {
@@ -46,7 +53,16 @@ export default function Game({ puzzle }: Props) {
       setCurrentGuess('');
 
       if (currentGuess == puzzle) {
-        return setIsGameWon(true);
+        setIsGameWon(true);
+        setIsGameLost(false);
+        setIsGameComplete(true);
+        return;
+      }
+
+      if (guesses.length >= 5) {
+        setIsGameWon(false);
+        setIsGameLost(true);
+        setIsGameComplete(true);
       }
     }
   };

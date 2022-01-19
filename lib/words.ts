@@ -23,6 +23,15 @@ export const getWordOfTheDay = () => {
   };
 };
 
+export const getRandomWord = () => {
+  const index = Math.floor(Math.random() * FIVELETTERPUZZLES.length);
+
+  return {
+    puzzle: FIVELETTERPUZZLES[index].toUpperCase(),
+    puzzleIndex: index,
+  };
+};
+
 export const evaluateGuess = (guess: string, solution: string): CharState[] => {
   const splitGuess = guess.split('');
   const splitSolution = solution.split('');

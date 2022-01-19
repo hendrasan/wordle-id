@@ -15,7 +15,7 @@ const Home: NextPage = () => {
       </Head>
 
       <div className='title text-center'>
-        <h1 className='text-6xl font-bold uppercase tracking-tight'>
+        <h1 className='text-4xl md:text-6xl font-bold uppercase tracking-tight'>
           Wordle ID
         </h1>
       </div>

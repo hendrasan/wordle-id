@@ -1,7 +1,11 @@
 import clsxm from '@/lib/clsxm';
 import Link from 'next/link';
 
-export default function Header() {
+type Props = {
+  title?: string;
+};
+
+export default function Header({ title }: Props) {
   return (
     <header
       className={clsxm(
@@ -13,6 +17,11 @@ export default function Header() {
           <a>Wordle ID</a>
         </Link>
       </h1>
+      {title && (
+        <strong className={clsxm('mr-2 uppercase text-yellow-500')}>
+          {title}
+        </strong>
+      )}
       <button>
         <svg
           xmlns='http://www.w3.org/2000/svg'

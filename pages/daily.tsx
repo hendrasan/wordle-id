@@ -8,7 +8,7 @@ const Daily: NextPage = () => {
 
   return (
     <>
-      <Header />
+      <Header title='Daily Puzzle' />
 
       <Game puzzle={puzzle} />
     </>
