@@ -63,7 +63,7 @@ export function Keyboard({
   }, [isGameWon, onChar, onDelete, onEnter]);
 
   return (
-    <>
+    <div className='mx-2'>
       <div className='flex justify-center mb-2 space-x-1'>
         {['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'].map((char, i) => (
           <Key
@@ -117,6 +117,6 @@ export function Keyboard({
           </svg>
         </Key>
       </div>
-    </>
+    </div>
   );
 }
