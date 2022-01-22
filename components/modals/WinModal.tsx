@@ -1,6 +1,3 @@
-import { Dialog, Transition } from '@headlessui/react';
-import toast from 'react-hot-toast';
-import { Cell } from '../game/grids/Cell';
 import Modal from './Modal';
 import ModalShareSection from './ModalShareSection';
 

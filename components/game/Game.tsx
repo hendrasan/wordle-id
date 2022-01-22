@@ -1,4 +1,8 @@
 import {
+  loadGameStateFromLocalStorage,
+  saveGameStateToLocalStorage,
+} from '@/lib/localStorage';
+import {
   evaluateGuess,
   getRandomWord,
   getWordOfTheDay,
@@ -33,9 +37,54 @@ export default function Game({ mode = 'daily' }: Props) {
 
   useEffect(() => {
     if (mode === 'daily') {
+      const gameState = loadGameStateFromLocalStorage();
+      setGuesses(gameState.guesses);
+      setEvaluations(gameState.evaluations);
+      if (gameState.gameStatus === 'WIN') {
+        setIsGameWon(true);
+        setIsGameLost(false);
+        setIsGameComplete(true);
+      } else if (gameState.gameStatus === 'LOSE') {
+        setIsGameWon(false);
+        setIsGameLost(true);
+        setIsGameComplete(true);
+      }
+    }
+  }, [mode]);
+
+  useEffect(() => {
+    if (mode === 'daily') {
+      const gameState = loadGameStateFromLocalStorage();
+
+      let gameStatus = gameState.gameStatus;
+      if (isGameWon) gameStatus = 'WIN';
+      if (isGameLost) gameStatus = 'LOSE';
+
+      saveGameStateToLocalStorage({
+        ...gameState,
+        guesses,
+        evaluations,
+        lastCompleted: isGameWon ? Date.now() : null,
+        gameStatus: gameStatus,
+      });
+    }
+  }, [guesses, evaluations, isGameWon, isGameLost, mode]);
+
+  useEffect(() => {
+    if (mode === 'daily') {
       let { puzzle, puzzleIndex } = getWordOfTheDay();
       setPuzzle(puzzle);
       setPuzzleIndex(puzzleIndex);
+
+      const gameState = loadGameStateFromLocalStorage();
+      if (puzzle !== gameState.puzzle) {
+        saveGameStateToLocalStorage({
+          ...gameState,
+          gameStatus: 'PLAYING',
+          puzzle,
+          lastPlayed: Date.now(),
+        });
+      }
     } else if (mode === 'endless') {
       const { puzzle, puzzleIndex } = getRandomWord();
 

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import toast from 'react-hot-toast';
 
 type Props = {
@@ -96,6 +97,18 @@ export default function ModalShareSection({
             />
           </svg>
         </a>
+      </div>
+
+      <div>
+        <hr className='my-4' />
+        <p>
+          Main lagi dengan kata baru besok atau main tanpa batas di mode{' '}
+          <Link href='/endless'>
+            <a className='text-green-500 underline underline-offset-2 font-medium'>
+              Endless
+            </a>
+          </Link>
+        </p>
       </div>
     </>
   );

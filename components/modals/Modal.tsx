@@ -38,7 +38,7 @@ export default function Modal({ isOpen, onClose, children }: Props) {
             leaveFrom='opacity-100 translate-y-0'
             leaveTo='opacity-0 translate-y-4'
           >
-            <div className='inline-block w-full max-w-md p-4 md:p-6 m-3 overflow-hidden text-sm text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl relative'>
+            <div className='inline-block w-full max-w-md p-4 md:p-6 m-3 overflow-hidden text-sm text-left leading-relaxed align-middle transition-all transform bg-white shadow-xl rounded-2xl relative'>
               <button
                 className='absolute top-3 md:top-5 right-2 h-8 w-8 text-gray-800'
                 onClick={onClose}
