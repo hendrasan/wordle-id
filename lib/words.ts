@@ -12,7 +12,7 @@ export const isWordValid = (word: string) => {
 };
 
 export const getWordOfTheDay = () => {
-  const epochMs = 1642636800000;
+  const epochMs = 1642896000000;
   const now = Date.now();
   const msInDay = 86400000;
   const index = Math.floor((now - epochMs) / msInDay);

@@ -1,34 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+[Wordle](https://www.powerlanguage.co.uk/wordle/) adalah permainan tebak kata harian yang sangat populer sekarang. Tapi karena kosakata yang dipakai Wordle adalah bahasa Inggris, timbul rasa penasaran bagaimana kalau ada Wordle bahasa Indonesia. Itulah awal mula repo ini lahir.
 
-## Getting Started
+Berawal dari repo [hannahcode](https://github.com/hannahcode/wordle), setelah melihat keseluruhan code, sepertinya cocok untuk jadi bahan belajar Next.js.
 
-First, run the development server:
+Langkah selanjutnya adalah mencari daftar kata bahasa Indonesia. Setelah membandingkan beberapa repo, akhirnya pilihan ada di [sastrawi](https://github.com/sastrawi/sastrawi) karena isinya adalah kata dasar saja, tanpa tanda "-" atau spasi.
+
+Dari list kata tersebut (ada sekitar 24 ribu), saya menggunakan bantuan Sublime Text untuk mengambil hanya kata yang panjangnya 5 huruf, hasilnya ada sekitar 6500 kata. Kemudian menggunakan bash command berikut:
+
+```bash
+shuf -n 2000 fiveletterwords.txt > puzzles.txt
+grep -Fvxf puzzles.txt fiveletterwords.txt > validguesses.txt
+```
+
+`shuf` untuk mengambil 2000 kata acak dari fiveletterwords.txt kemudian disimpan ke puzzles.txt.  
+`grep` untuk membuang 2000 kata yang ada di puzzles.txt dari fiveletterwords.txt kemudian disimpan ke validguesses.txt
+
+puzzles.txt dan validguesses.txt kemudian di-copy ke `constants/wordlist.ts` dan menjadi database game ini dan dipakai untuk memvalidasi jawaban dari user.
+
+Secara gameplay, secara keseluruhan mirip Wordle. Tapi karena fokus pembelajaran saya adalah fungsi utamanya saja, saya tidak menyertakan fitur-fitur seperti statistik dan setting hard mode/dark mode.
+
+Adapun saya menambahkan mode Endless supaya user bisa memainkan game ini terus-terusan tanpa harus menunggu hari berikutnya.
+
+Beberapa fitur yang bisa dikembangkan (jika kamu tertarik untuk membuat Wordle versi kamu), seperti:
+
+1. Buat tebakan dengan 6 huruf atau lebih
+2. Buat jumlah tebakan supaya lebih atau kurang dari 6 kali
+3. Tambah fitur hint untuk membantu mengisi 1 huruf di board (hanya bisa dipakai sekali, tapi dengan konsekuensi user tidak bisa share hasilnya)
+4. Buat mode time attack. Jadi user diberikan misal 5 tebakan dan harus menebak 5 kata itu secepatnya.
+5. Buat leaderboard dari mode time attack.
+6. Dan masih banyak lagi.
+
+---
+
+Jika ingin menjalankan repo ini di local kamu, lakukan langkah-langkah berikut:
+
+1. Clone repo ini
+
+2. Jalankan perintah berikut untuk install dependencies
+
+```bash
+npm install
+# atau
+yarn
+```
+
+3. Jalankan perintah berikut untuk menjalankan aplikasi
 
 ```bash
 npm run dev
-# or
+# atau
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Buka [http://localhost:3000](http://localhost:3000) di browser.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+5. Jika ingin menggunakan list kata versi kamu, silakan ganti list di `constants/wordlist.ts`
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+---
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+PS: Kunjungi juga [Katla](https://katla.vercel.app/) buatan [Fatih Kalifa](https://github.com/pveyes) rilis. Katla memiliki fitur yang lebih mendekati Wordle (ada statistik permainan dll) dan fitur tambahan lain (definisi kata). Repo ini mungkin akan di-update dengan ~~contekan~~ adaptasi fitur dari Katla (atau tidak, tergantung mood penulis 😆)
