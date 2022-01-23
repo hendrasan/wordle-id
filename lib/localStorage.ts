@@ -28,3 +28,14 @@ export const loadGameStateFromLocalStorage = () => {
   const state = localStorage.getItem(gameStateKey);
   return state ? (JSON.parse(state) as GameStateProps) : initialState;
 };
+
+const endlessBestStreakStateKey = 'wid:endlessBestStreak';
+
+export const saveEndlessStreakStateToLocalStorage = (bestStreak: number) => {
+  localStorage.setItem(endlessBestStreakStateKey, JSON.stringify(bestStreak));
+};
+
+export const loadEndlessStreakStateFromLocalStorage = () => {
+  const state = localStorage.getItem(endlessBestStreakStateKey);
+  return state ? (JSON.parse(state) as number) : 0;
+};
