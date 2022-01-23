@@ -1,3 +1,4 @@
+import { CharState } from '@/lib/states';
 import Modal from './Modal';
 import ModalShareSection from './ModalShareSection';
 
@@ -7,7 +8,7 @@ type Props = {
   puzzle?: string;
   puzzleIndex?: number;
   guesses: string[];
-  evaluations?: string[][];
+  evaluations?: CharState[][];
 };
 
 export default function InfoModal({

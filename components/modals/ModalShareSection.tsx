@@ -1,3 +1,4 @@
+import { CharState } from '@/lib/states';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 
@@ -5,7 +6,7 @@ type Props = {
   puzzle?: string;
   puzzleIndex?: number;
   guesses: string[];
-  evaluations?: string[][];
+  evaluations?: CharState[][];
 };
 
 export default function ModalShareSection({

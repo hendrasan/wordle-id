@@ -1,8 +1,10 @@
+import { CharState } from './states';
+
 const gameStateKey = 'wid:gameState';
 
 type GameStateProps = {
   guesses: string[];
-  evaluations: string[][];
+  evaluations: CharState[][];
   gameStatus: 'PLAYING' | 'WIN' | 'LOSE' | null;
   lastPlayed: number | null;
   lastCompleted: number | null;

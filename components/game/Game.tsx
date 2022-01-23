@@ -2,6 +2,7 @@ import {
   loadGameStateFromLocalStorage,
   saveGameStateToLocalStorage,
 } from '@/lib/localStorage';
+import { CharState } from '@/lib/states';
 import {
   evaluateGuess,
   getRandomWord,
@@ -25,7 +26,7 @@ export default function Game({ mode = 'daily' }: Props) {
   const modeLabel =
     mode === 'daily' ? 'Daily' : mode === 'endless' ? 'Endless Mode' : '';
   const [guesses, setGuesses] = useState<string[]>([]);
-  const [evaluations, setEvaluations] = useState<string[][]>([]);
+  const [evaluations, setEvaluations] = useState<CharState[][]>([]);
   const [currentGuess, setCurrentGuess] = useState('');
   const [isGameWon, setIsGameWon] = useState(false);
   const [isGameLost, setIsGameLost] = useState(false);
@@ -186,7 +187,12 @@ export default function Game({ mode = 'daily' }: Props) {
     <div>
       <Header title={modeLabel} />
 
-      <Grid guesses={guesses} currentGuess={currentGuess} puzzle={puzzle} />
+      <Grid
+        guesses={guesses}
+        evaluations={evaluations}
+        currentGuess={currentGuess}
+        puzzle={puzzle}
+      />
 
       <Keyboard
         guesses={guesses}

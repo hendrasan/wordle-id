@@ -1,3 +1,4 @@
+import { CharState } from '@/lib/states';
 import { Dialog, Transition } from '@headlessui/react';
 import toast from 'react-hot-toast';
 import { Cell } from '../game/grids/Cell';
@@ -10,7 +11,7 @@ type Props = {
   puzzle?: string;
   puzzleIndex?: number;
   guesses: string[];
-  evaluations?: string[][];
+  evaluations?: CharState[][];
 };
 
 export default function InfoModal({
