@@ -65,7 +65,7 @@ export default function Game({ mode = 'daily' }: Props) {
         ...gameState,
         guesses,
         evaluations,
-        lastCompleted: isGameWon ? Date.now() : null,
+        // lastCompleted: isGameWon ? Date.now() : null,
         gameStatus: gameStatus,
       });
     }
