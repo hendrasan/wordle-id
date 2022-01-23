@@ -18,7 +18,10 @@ class MyDocument extends Document {
             property='og:description'
             content='Permainan Tebak Kata Bahasa Indonesia'
           />
-          <meta property='og:image' content='/og.jpg' />
+          <meta
+            property='og:image'
+            content='https://wordle-id.vercel.app/og.jpg'
+          />
 
           <meta name='twitter:card' content='summary_large_image' />
           <meta
