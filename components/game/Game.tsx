@@ -102,6 +102,7 @@ export default function Game({ mode = 'daily' }: Props) {
     setIsGameLost(false);
     setIsWinModalShown(false);
     setGuesses([]);
+    setEvaluations([]);
     setCurrentGuess('');
     setPuzzle(puzzle);
     setPuzzleIndex(puzzleIndex);
