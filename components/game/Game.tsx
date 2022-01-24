@@ -43,21 +43,23 @@ export default function Game({ mode = 'daily' }: Props) {
   useEffect(() => {
     if (mode === 'daily') {
       const gameState = loadGameStateFromLocalStorage();
-      setGuesses(gameState.guesses);
-      setEvaluations(gameState.evaluations);
-      if (gameState.gameStatus === 'WIN') {
-        setIsGameWon(true);
-        setIsGameLost(false);
-        setIsGameComplete(true);
-      } else if (gameState.gameStatus === 'LOSE') {
-        setIsGameWon(false);
-        setIsGameLost(true);
-        setIsGameComplete(true);
+      if (gameState.puzzle === puzzle) {
+        setGuesses(gameState.guesses);
+        setEvaluations(gameState.evaluations);
+        if (gameState.gameStatus === 'WIN') {
+          setIsGameWon(true);
+          setIsGameLost(false);
+          setIsGameComplete(true);
+        } else if (gameState.gameStatus === 'LOSE') {
+          setIsGameWon(false);
+          setIsGameLost(true);
+          setIsGameComplete(true);
+        }
       }
     } else if (mode === 'endless') {
       setEndlessBestStreak(loadEndlessStreakStateFromLocalStorage());
     }
-  }, [mode]);
+  }, [mode, puzzle]);
 
   useEffect(() => {
     if (mode === 'daily') {
