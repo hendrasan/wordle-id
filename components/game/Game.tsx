@@ -18,6 +18,7 @@ import LoseModal from '../modals/LoseModal';
 import WinModal from '../modals/WinModal';
 import Grid from './grids/Grid';
 import { Keyboard } from './keyboard/Keyboard';
+import * as gtag from '@/lib/gtag';
 
 type Props = {
   // puzzle: string;
@@ -42,6 +43,10 @@ export default function Game({ mode = 'daily' }: Props) {
 
   useEffect(() => {
     if (mode === 'daily') {
+      let { puzzle, puzzleIndex } = getWordOfTheDay();
+      setPuzzle(puzzle);
+      setPuzzleIndex(puzzleIndex);
+
       const gameState = loadGameStateFromLocalStorage();
       if (gameState.puzzle === puzzle) {
         setGuesses(gameState.guesses);
@@ -55,11 +60,34 @@ export default function Game({ mode = 'daily' }: Props) {
           setIsGameLost(true);
           setIsGameComplete(true);
         }
+      } else {
+        saveGameStateToLocalStorage({
+          ...gameState,
+          gameStatus: 'PLAYING',
+          puzzle,
+          lastPlayed: Date.now(),
+        });
+
+        // @ts-ignore
+        gtag.event({
+          action: 'game_started',
+          category: mode,
+        });
       }
     } else if (mode === 'endless') {
+      const { puzzle, puzzleIndex } = getRandomWord();
+
+      setPuzzle(puzzle);
+      setPuzzleIndex(puzzleIndex);
       setEndlessBestStreak(loadEndlessStreakStateFromLocalStorage());
+
+      // @ts-ignore
+      gtag.event({
+        action: 'game_started',
+        category: mode,
+      });
     }
-  }, [mode, puzzle]);
+  }, [mode]);
 
   useEffect(() => {
     if (mode === 'daily') {
@@ -78,29 +106,6 @@ export default function Game({ mode = 'daily' }: Props) {
       });
     }
   }, [evaluations, guesses, isGameLost, isGameWon, mode]);
-
-  useEffect(() => {
-    if (mode === 'daily') {
-      let { puzzle, puzzleIndex } = getWordOfTheDay();
-      setPuzzle(puzzle);
-      setPuzzleIndex(puzzleIndex);
-
-      const gameState = loadGameStateFromLocalStorage();
-      if (puzzle !== gameState.puzzle) {
-        saveGameStateToLocalStorage({
-          ...gameState,
-          gameStatus: 'PLAYING',
-          puzzle,
-          lastPlayed: Date.now(),
-        });
-      }
-    } else if (mode === 'endless') {
-      const { puzzle, puzzleIndex } = getRandomWord();
-
-      setPuzzle(puzzle);
-      setPuzzleIndex(puzzleIndex);
-    }
-  }, [mode]);
 
   useEffect(() => {
     if (isGameComplete) {
@@ -131,6 +136,7 @@ export default function Game({ mode = 'daily' }: Props) {
         }, 2000);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isGameComplete, isGameLost, isGameWon, mode, puzzle]);
 
   const handleGameWon = () => {
@@ -147,6 +153,12 @@ export default function Game({ mode = 'daily' }: Props) {
         saveEndlessStreakStateToLocalStorage(incCurrentStreak);
       }
     }
+
+    // @ts-ignore
+    gtag.event({
+      action: 'game_won',
+      category: mode,
+    });
   };
 
   const handleGameLost = () => {
@@ -157,6 +169,12 @@ export default function Game({ mode = 'daily' }: Props) {
     if (mode === 'endless') {
       setEndlessCurrentStreak(0);
     }
+
+    // @ts-ignore
+    gtag.event({
+      action: 'game_lost',
+      category: mode,
+    });
   };
 
   const newGame = () => {
@@ -171,6 +189,12 @@ export default function Game({ mode = 'daily' }: Props) {
     setCurrentGuess('');
     setPuzzle(puzzle);
     setPuzzleIndex(puzzleIndex);
+
+    // @ts-ignore
+    gtag.event({
+      action: 'play_more',
+      category: mode,
+    });
   };
 
   const onChar = (value: string) => {
