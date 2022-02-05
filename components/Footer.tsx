@@ -10,6 +10,15 @@ export default function Footer() {
       >
         Wordle
       </a>
+      . Source code at{' '}
+      <a
+        className='text-green-500 underline underline-offset-2 font-medium'
+        href='https://github.com/hendrasan/wordle-id'
+        target='_blank'
+        rel='noreferrer'
+      >
+        Github
+      </a>
     </footer>
   );
 }

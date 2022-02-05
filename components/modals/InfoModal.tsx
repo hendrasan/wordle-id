@@ -93,6 +93,20 @@ export default function InfoModal({ isOpen, onClose }: Props) {
           yang bisa kamu tebak.
         </p>
       </div>
+
+      <hr className='my-4' />
+
+      <p>
+        Source code bisa dilihat di{' '}
+        <a
+          className='text-green-500 underline underline-offset-2 font-medium'
+          href='https://github.com/hendrasan/wordle-id'
+          target='_blank'
+          rel='noreferrer'
+        >
+          Github
+        </a>
+      </p>
     </Modal>
   );
 }
