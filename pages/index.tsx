@@ -9,8 +9,8 @@ const Home: NextPage = () => {
   return (
     <div className='px-4 md:px-8 max-w-md min-h-screen justify-center mx-auto flex flex-col'>
       <Head>
-        <title>Wordle ID</title>
-        <meta name='description' content='Wordle ID' />
+        <title>Wordle ID - Wordle dengan tebakan bahasa Indonesia</title>
+        <meta name='description' content='Wordle dengan tebakan bahasa Indonesia' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
