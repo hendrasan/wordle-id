@@ -28,6 +28,12 @@ class MyDocument extends Document {
             property='twitter:domain'
             content='https://wordle-id.vercel.app'
           />
+
+          <meta
+            name='google-site-verification'
+            content='w5R7r8JlTPRHmhxYh89A21R5gZEf4U5qD0BZbhDciqQ'
+          />
+
           <link
             href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=optional'
             rel='stylesheet'

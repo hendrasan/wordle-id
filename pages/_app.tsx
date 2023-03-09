@@ -5,6 +5,7 @@ import Layout from '@/components/Layout';
 import Script from 'next/script';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import * as gtag from '@/lib/gtag';
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -43,6 +44,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       />
       <Toaster position='top-center' reverseOrder={false} />
       <Component {...pageProps} />
+      <Analytics />
     </Layout>
   );
 }
